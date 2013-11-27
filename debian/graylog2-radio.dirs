@@ -1,0 +1,3 @@
+opt/graylog2/radio
+etc/graylog2
+var/log/graylog2-radio

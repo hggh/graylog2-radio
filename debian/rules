@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_install:
+	cp $(CURDIR)/graylog2-radio.conf.example $(CURDIR)/debian/graylog2-radio/etc/graylog2/radio.conf
+	dh_install
+
+
+override_dh_installinit:
+	dh_installinit --error-handler=true
