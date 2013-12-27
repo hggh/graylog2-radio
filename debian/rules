@@ -4,7 +4,7 @@
 	dh $@
 
 override_dh_install:
-	cp $(CURDIR)/graylog2-radio.conf.example $(CURDIR)/debian/graylog2-radio/etc/graylog2/radio.conf
+	cp $(CURDIR)/graylog2-radio.conf.example $(CURDIR)/debian/graylog2-radio/etc/graylog2/radio/radio.conf
 	dh_install
 
 

@@ -2,9 +2,6 @@
 
 set -e
 
-. /usr/share/debconf/confmodule
-
-
 if [ "$1" = configure ]; then
 	if ! getent passwd _graylog2 > /dev/null; then
 		adduser --system --quiet --home /opt/graylog2 \
@@ -18,6 +15,12 @@ if [ "$1" = configure ]; then
 
 fi
 
-db_stop
+# generate node-id if not available
+if [ ! -e /etc/graylog2/radio/node-id ]; then
+	uuidgen > /etc/graylog2/radio/node-id
+	chmod 0640 /etc/graylog2/radio/node-id
+	chown _graylog2:_graylog2 /etc/graylog2/radio/node-id
+fi
+
 
 #DEBHELPER#

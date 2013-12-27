@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = purge ]; then
+	rm -rf /etc/graylog2/radio/node-id
+	rm -rf /etc/graylog2/radio/radio.conf
+	rm -rf /var/log/graylog2-radio
+	rm -rf /var/run/graylog2-radio
+fi
+
+#DEBHELPER#
+

@@ -17,9 +17,11 @@ DESC="Graylog2 Radio"
 NAME=graylog2-radio
 JAR_FILE=/opt/graylog2/radio/graylog2-radio.jar
 DAEMON=/usr/bin/java
-PIDFILE=/var/run/graylog2-radio/$NAME.pid
-DAEMON_ARGS="-jar $JAR_FILE -p $PIDFILE -f /etc/graylog2/radio.conf"
+RUNDIR=/var/run/graylog2-radio
+PIDFILE=$RUNDIR/$NAME.pid
+DAEMON_ARGS="-jar $JAR_FILE -p $PIDFILE -f /etc/graylog2/radio/radio.conf"
 SCRIPTNAME=/etc/init.d/$NAME
+GRAYLOG2_USER=_graylog2
 RUN=no
 
 # Exit if the package is not installed
@@ -33,6 +35,18 @@ RUN=no
 . /lib/lsb/init-functions
 
 
+running()
+{
+	[ ! -f "$PIDFILE" ] && return 1
+	status="0"
+	pidofproc -p $PIDFILE $JAR_FILE >/dev/null || status="$?"
+	if [ "$status" = 0 ]; then
+		return 0
+	fi
+
+	return 1
+}
+
 do_start()
 {
 	if [ "$RUN" != "yes" ] ; then
@@ -41,9 +55,19 @@ do_start()
 
 		exit 0
 	fi
-	start-stop-daemon --start --background --chuid _graylog2:_graylog2 --quiet --no-close --pidfile $PIDFILE \
-		--startas $DAEMON -- $DAEMON_ARGS >> /var/log/graylog2-radio/radio.log \
-		|| return 2
+	test -e "$RUNDIR" || install -m 755 -o _graylog2 -g _graylog2 -d "$RUNDIR"
+	if running ; then
+		log_progress_msg "apparently already running"
+		return 1
+	else
+		su -s /bin/bash -c "nohup $DAEMON $DAEMON_ARGS >> /var/log/graylog2-radio/console.log 2>&1 &" ${GRAYLOG2_USER} || return 2
+		sleep 2
+		if running ; then
+			return 0
+		else
+			return 2
+		fi
+	fi
 }
 
 do_stop()
