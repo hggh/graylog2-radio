@@ -1,3 +1,10 @@
+graylog2-radio (0.20.0~rc.1.1-1) unstable; urgency=low
+
+  * Imported Upstream version 0.20.0~rc.1.1
+  * d/p/01_radio_debian_conf.patch: refreshed for new upstream
+
+ -- Jonas Genannt <jonas.genannt@capi2name.de>  Thu, 30 Jan 2014 22:16:42 +0100
+
 graylog2-radio (0.20.0~preview.7-1) unstable; urgency=low
 
   * Initial Debian Release
