@@ -15,7 +15,7 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DESC="Graylog2 Radio"
 NAME=graylog2-radio
-JAR_FILE=/opt/graylog2/radio/graylog2-radio.jar
+JAR_FILE=/usr/share/graylog2-radio/graylog2-radio.jar
 DAEMON=/usr/bin/java
 RUNDIR=/var/run/graylog2-radio
 PIDFILE=$RUNDIR/$NAME.pid
