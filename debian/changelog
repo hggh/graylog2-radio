@@ -1,3 +1,12 @@
+graylog2-radio (0.20.0~rc.1.1-2) unstable; urgency=low
+
+  * d/control: better java depends line
+  * d/copyright: updated copyright
+  * d/control: added Vcs-URLs
+  * moved jar to usr/share
+
+ -- Jonas Genannt <jonas.genannt@capi2name.de>  Mon, 17 Feb 2014 22:16:20 +0100
+
 graylog2-radio (0.20.0~rc.1.1-1) unstable; urgency=low
 
   * Imported Upstream version 0.20.0~rc.1.1
