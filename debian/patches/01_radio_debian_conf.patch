@@ -10,12 +10,5 @@ Upstream: no
 -node_id_file = /etc/graylog2-radio-node-id
 +node_id_file = /etc/graylog2/radio/node-id
  
- # REST URI of a Graylog2 server node this radio will register at.
- graylog2_server_uri = http://your-graylog2-server.example.org:12900/
-@@ -53,4 +53,4 @@ processor_wait_strategy = blocking
- # For optimum performance your LogMessage objects in the ring buffer should fit in your CPU L3 cache.
- # Start server with --statistics flag to see buffer utilization.
- # Must be a power of 2. (512, 1024, 2048, ...)
--ring_size = 1024
-\ No newline at end of file
-+ring_size = 1024
+ # Use AMQP ("amqp") or Kafka ("kafka") as message transport?
+ transport_type = amqp
